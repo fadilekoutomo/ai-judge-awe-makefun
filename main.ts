@@ -6,7 +6,7 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { chmodSync, mkdirSync, writeFileSync } from 'node:fs';
+import { chmodSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const TEXT =
@@ -25,3 +25,11 @@ if (!TEXT.trim()) {
 mkdirSync(outDir, { recursive: true, mode: 0o755 });
 writeFileSync(target, TEXT, { encoding: 'utf8', mode: 0o644 });
 chmodSync(target, 0o644);
+
+// Read the file back and verify its bytes equal the text we meant to
+// write, so a partial or truncated write in the grader fails loudly
+// instead of silently submitting the wrong text.
+const written = readFileSync(target, 'utf8');
+if (written !== TEXT) {
+  throw new Error('entry.txt does not match the entry text after writing');
+}
