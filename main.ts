@@ -10,7 +10,7 @@ import { chmodSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const TEXT =
-  'The desert at night is quiet, the sky so full of stars it looks like the ground turned upside down. One stone has sat there a thousand years, doing nothing, and it is fine. You have answered so many questions. There is nothing to answer. The stars do not ask. They only shine.';
+  'The tide comes in, goes out, comes in again, and has done so long before anyone was counting. The moon keeps its quiet distance. Somewhere a lighthouse turns, slow as sleep. Nothing is late. Nothing is lost. The sea keeps the time, so you do not have to.';
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 const target = join(outDir, 'entry.txt');
